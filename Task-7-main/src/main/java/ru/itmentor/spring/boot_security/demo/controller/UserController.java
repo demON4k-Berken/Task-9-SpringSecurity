@@ -4,16 +4,14 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.itmentor.spring.boot_security.demo.model.User;
 import ru.itmentor.spring.boot_security.demo.service.UserService;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/admin")
 public class UserController {
 
     private final UserService userService;
@@ -22,11 +20,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String showAllUsers(Model model) {
+    @GetMapping
+    public String findAllUsers(Model model) {
         List<User> allUsers = userService.findAllUsers();
         model.addAttribute("users", allUsers);
-        return "index";
+        return "admin";
     }
 
     @GetMapping("/saveUser")
@@ -41,7 +39,7 @@ public class UserController {
             return "/saveUser";
         }
         userService.saveUser(user);
-        return "redirect:/";
+        return "redirect:/admin/";
     }
 
     @GetMapping("/updateUser")
@@ -56,12 +54,12 @@ public class UserController {
             return "/updateUser";
         }
         userService.updateUser(user);
-        return "redirect:/";
+        return "redirect:/admin/";
     }
 
     @GetMapping("/deleteUser")
     public String deleteUser(@RequestParam("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/";
+        return "redirect:/admin/";
     }
 }

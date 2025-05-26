@@ -1,45 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>all-users</title>
+  <title>Spring Security Example</title>
 </head>
 <body>
-<div th:switch="${users}">
-    <h2 th:case="null">No users found!</h2>
-    <div th:case="*">
-        <h2>All Users</h2>
-        <table border="1">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Lastname</th>
-                <th>Age</th>
-                <th colspan="2">Operations</th>
-            </tr>
-            </thead>
-            <tbody>
+<h1>This page will be Login Page</h1>
 
-            <tr th:each="user:${users}">
 
-                <td th:text="${user.id}"></td>
-                <td th:text="${user.name}"></td>
-                <td th:text="${user.lastName}"></td>
-                <td th:text="${user.age}"></td>
-                <td><a th:href="@{/updateUser(id=${user.id})}">
-                    <input type="button" value="Update"/></a></td>
-                <td><a th:href="@{/deleteUser(id=${user.id})}">
-                    <input type="button" value="Delete"/></a></td>
-            </tr>
-            </tbody>
-        </table>
-        <br>
-    </div>
-    <input type="button" value="Create user"
-           onclick="window.location.href = 'saveUser'"/>
-
-</div>
 </body>
 </html>
