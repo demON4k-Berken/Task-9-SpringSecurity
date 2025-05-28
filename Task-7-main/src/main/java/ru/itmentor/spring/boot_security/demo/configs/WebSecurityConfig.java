@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
@@ -38,27 +37,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//                User.withDefaultPasswordEncoder()
-//                        .username("user")
-//                        .password("user")
-//                        .roles("USER")
-//                        .build();
-//        UserDetails admin =
-//                User.withDefaultPasswordEncoder()
-//                        .username("admin")
-//                        .password("admin")
-//                        .roles("ADMIN")
-//                        .build();
-UserDetails user =
-        User.withDefaultPasswordEncoder()
-                .username("user")
-                .username("admin")
-                .password("user")
-                .password("admin")
-                .roles("USER")
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user);
+
+        UserDetails user =
+                User.withDefaultPasswordEncoder()
+                        .username("user")
+                        .password("user")
+                        .roles("USER")
+                        .build();
+
+        UserDetails admin =
+                User.withDefaultPasswordEncoder()
+                        .username("admin")
+                        .password("admin")
+                        .roles("ADMIN")
+                        .build();
+
+        return new InMemoryUserDetailsManager(user, admin);
     }
 }

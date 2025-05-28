@@ -53,7 +53,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "/updateUser";
         }
-        userService.updateUser(user);
+        userService.saveUser(user);
         return "redirect:/admin/";
     }
 
