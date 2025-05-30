@@ -22,6 +22,12 @@
     <input type="text" th:field="*{age}" id="age" placeholder="age"/>
     <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Ошибка написания возраста</div>
     <br>
+    <label for="password">Enter password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="password"/>
+    <br>
+    <label for="role">Enter role</label>
+    <input type="text" th:field="*{role}" id="role" placeholder="role"/>
+    <br>
     <input type="submit" value="Create!">
 </form>
 </body>

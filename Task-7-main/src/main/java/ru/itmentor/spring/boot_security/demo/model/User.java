@@ -36,6 +36,12 @@ public class User {
     @Column(name = "age")
     private int age;
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "role")
+    private String role;
+
     public User(String name, String lastName, int age) {
         this.name = name;
         this.lastName = lastName;

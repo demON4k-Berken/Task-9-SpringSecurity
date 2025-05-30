@@ -11,7 +11,7 @@ import ru.itmentor.spring.boot_security.demo.service.UserService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/")
 public class UserController {
 
     private final UserService userService;
@@ -24,7 +24,7 @@ public class UserController {
     public String findAllUsers(Model model) {
         List<User> allUsers = userService.findAllUsers();
         model.addAttribute("users", allUsers);
-        return "admin";
+        return "/admin";
     }
 
     @GetMapping("/saveUser")
