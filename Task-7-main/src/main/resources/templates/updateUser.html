@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Update User</title>
+  <title>Изменение пользователя</title>
 </head>
 <body>
-<h1>Update User</h1>
+<h1>Изменение пользователя</h1>
 <form th:action="@{/admin/updateUser}" th:object="${user}" method="post">
   <input type="hidden" th:field="*{id}"/>
 

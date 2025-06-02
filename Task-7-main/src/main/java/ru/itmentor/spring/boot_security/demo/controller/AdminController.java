@@ -62,10 +62,15 @@ public class AdminController {
     }
 
     @PostMapping("/updateUser")
-    public String updateUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
+    public String updateUser(@Valid @ModelAttribute("user") User user,
+                             BindingResult bindingResult,
+                             @RequestParam("roles") Set<Long> roleIds) {
         if (bindingResult.hasErrors()) {
             return "/updateUser";
         }
+        Set<Role> roles = roleIds.stream()
+                .map(id -> roleRepository.findById(id).orElseThrow())
+                .collect(Collectors.toSet());
         userService.saveUser(user);
         return "redirect:/admin/";
     }

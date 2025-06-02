@@ -1,20 +1,30 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>User Page</title>
+    <title>Страница пользователя</title>
 </head>
 <body>
-<h1>User Info</h1>
-
-<tr th:each="role:${user.roles}">
-    <p>ID: <span th:text="${user.id}"></span></p>
-    <p>Username: <span th:text="${user.username}"></span></p>
-    <p>Roles: <span th:text="${role.name}"></span></p>
-</tr>
-
+<h1>Информация пользователя</h1>
+<table border="2">
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Роли</th>
+    </tr>
+    <tr>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td>
+            <span th:each="role, iter : ${user.roles}"
+                  th:text="${role.name} + (${iter.last} ? '' : ', ')">
+            </span>
+        </td>
+    </tr>
+</table>
+<br>
 <form th:action="@{/logout}" method="post">
-    <button type="submit">Выйти</button>
+    <button type="submit">Выйти из аккаунта</button>
 </form>
 </body>
 </html>

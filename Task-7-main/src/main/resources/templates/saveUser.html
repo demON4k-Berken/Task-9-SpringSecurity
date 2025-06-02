@@ -1,33 +1,45 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Add User</title>
+    <title>Добавление пользователя</title>
 </head>
 <body>
-<h1>Add User</h1>
-<form th:action="@{/admin/saveUser}" th:object="${user}" method="post">
+
+<h1>Добавление пользователя</h1>
+<form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="post">
+    <table border="2">
+
+
+        <tr>
+            <td><label for="username">Введите логин: </label></td>
+            <td><input type="text" th:field="*{username}" id="username" placeholder="Username"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Введите пароль: </label></td>
+            <td><input type="password" th:field="*{password}" id="password" placeholder="Password"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="roles"> Выберите роли: </label></td>
+            <td>
+                <select th:field="*{roles}" id="roles" multiple="multiple">
+                    <option th:each="role: ${allRoles}"
+                            th:value="${role.id}"
+                            th:text="${role.name}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br>
     <div>
-        <label>Username: <input type="text" th:field="*{username}"/></label>
-    </div>
-    <div>
-        <label>Password: <input type="password" th:field="*{password}"/></label>
-    </div>
-    <div>
-        <label>Roles:
-            <select multiple th:field="*{roles}">
-                <option th:each="role : ${allRoles}"
-                        th:value="${role.id}"
-                        th:text="${role.name}"></option>
-            </select>
-        </label>
-    </div>
-    <div>
-        <input type="submit" value="Save"/>
+        <input type="submit" value="Создать"/>
     </div>
 </form>
-<form th:action="@{/logout}" method="post">
-    <button type="submit">Выйти</button>
-</form>
+<br>
+<a th:href="@{/admin/}">
+    <button>Назад</button>
+</a>
 </body>
 </html>
