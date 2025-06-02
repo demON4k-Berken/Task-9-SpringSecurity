@@ -4,7 +4,6 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,7 +12,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role implements GrantedAuthority {                         // finish
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +30,11 @@ public class Role implements GrantedAuthority {                         // finis
 
     @Override
     public String getAuthority() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
         return name;
     }
 }

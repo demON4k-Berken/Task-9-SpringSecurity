@@ -1,6 +1,5 @@
 package ru.itmentor.spring.boot_security.demo.configs;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -12,15 +11,12 @@ import java.io.IOException;
 import java.util.Set;
 
 @Component
-@Slf4j
 public class SuccessUserHandler implements AuthenticationSuccessHandler {
-    // Spring Security использует объект Authentication, пользователя авторизованной сессии.
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
                                         Authentication authentication) throws IOException {
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
-        log.info("User {} logged in with roles: {}", authentication.getName(), roles);         //убрать? вот про это
 
         if (roles.contains("ROLE_ADMIN")) {
             httpServletResponse.sendRedirect("/admin/");

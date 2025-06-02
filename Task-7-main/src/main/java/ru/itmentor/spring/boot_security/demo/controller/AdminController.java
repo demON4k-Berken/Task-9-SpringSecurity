@@ -3,7 +3,6 @@ package ru.itmentor.spring.boot_security.demo.controller;
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,15 +18,10 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin/")
-public class AdminController {                              //finish
-
+@RequestMapping("/admin")
+public class AdminController {
     private final UserService userService;
-    private final RoleRepository roleRepository;        //add
-
-//    public AdminController(UserService userService) {
-//        this.userService = userService;
-//    }
+    private final RoleRepository roleRepository;
 
     @GetMapping
     public String findAllUsers(Model model) {
@@ -43,14 +37,6 @@ public class AdminController {                              //finish
         return "/saveUser";
     }
 
-    //    @PostMapping("/saveUser")
-//    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "/saveUser";
-//        }
-//        userService.saveUser(user);
-//        return "redirect:/admin/";
-//    }
     @PostMapping("/saveUser")
     public String saveUser(@Valid @ModelAttribute("user") User user,
                            BindingResult bindingResult,

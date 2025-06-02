@@ -1,30 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Admin Panel</title>
 </head>
 <body>
-<h1>Admin Panel</h1>
-<h2>Users</h2>
-<table>
+<h1>Панель Администратора</h1>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Выйти из аккаунта</button>
+</form>
+<h2>Список пользователей:</h2>
+<table border="2">
     <tr>
         <th>ID</th>
-        <th>Username</th>
-        <th>Roles</th>
-        <th>Actions</th>
+        <th>Имя</th>
+        <th>Роль</th>
+        <th colspan="2">Действие</th>
     </tr>
     <tr th:each="user : ${users}">
         <td th:text="${user.id}"></td>
         <td th:text="${user.username}"></td>
-        <td th:text="${user.roles}"></td>
         <td>
-            <a th:href="@{/admin/updateUser(id=${user.id})}">Edit</a>
-            <a th:href="@{/admin/deleteUser(id=${user.id})}">Delete</a>
+            <ul>
+                <li th:each="role : ${user.roles}"
+                    th:text="${role.name}">
+                </li>
+            </ul>
         </td>
+        <td><a th:href="@{/admin/updateUser(id=${user.id})}">
+            <input type="button" value="Изменить"/></a></td>
+        <td><a th:href="@{/admin/deleteUser(id=${user.id})}">
+            <input type="button" value="Удалить"/></a></td>
     </tr>
 </table>
-<a th:href="@{/admin/saveUser}">Add User</a>
 <br/>
-<a th:href="@{/logout}">Logout</a>
+</div>
+<input type="button" value="Создать нового"
+       onclick="window.location.href = 'saveUser'"/>
+</div>
 </body>
 </html>

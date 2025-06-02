@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Update User</title>
 </head>
 <body>
@@ -36,6 +37,8 @@
   </div>
 </form>
 
-<a th:href="@{/admin/}">Back to Admin Panel</a>
+<form th:action="@{/logout}" method="post">
+  <button type="submit">Выйти</button>
+</form>
 </body>
 </html>

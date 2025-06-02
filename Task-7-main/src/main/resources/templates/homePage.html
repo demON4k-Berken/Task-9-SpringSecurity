@@ -2,16 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Page</title>
+    <title>Приветствие</title>
 </head>
 <body>
-<h1>User Info</h1>
-
-<tr th:each="role:${user.roles}">
-    <p>ID: <span th:text="${user.id}"></span></p>
-    <p>Username: <span th:text="${user.username}"></span></p>
-    <p>Roles: <span th:text="${role.name}"></span></p>
-</tr>
+<h1>Привет, Гость!</h1>
 
 <form th:action="@{/logout}" method="post">
     <button type="submit">Выйти</button>
