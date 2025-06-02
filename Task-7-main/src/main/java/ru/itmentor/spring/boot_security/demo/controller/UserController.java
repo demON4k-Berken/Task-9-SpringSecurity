@@ -1,65 +1,28 @@
 package ru.itmentor.spring.boot_security.demo.controller;
 
-import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.itmentor.spring.boot_security.demo.model.User;
 import ru.itmentor.spring.boot_security.demo.service.UserService;
 
-import java.util.List;
-
 @Controller
-@RequestMapping("/admin/")
-public class UserController {
-
+@RequiredArgsConstructor
+@Slf4j
+@RequestMapping("/user/")
+public class UserController {                       // надо добавить пользователю базовые возможности в своей учетной записи
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
     @GetMapping
-    public String findAllUsers(Model model) {
-        List<User> allUsers = userService.findAllUsers();
-        model.addAttribute("users", allUsers);
-        return "/admin";
-    }
+    public String userPage(@AuthenticationPrincipal User principal, Model model) {
 
-    @GetMapping("/saveUser")
-    public String saveUserForm(Model model) {
-        model.addAttribute("user", new User());
-        return "/saveUser";
-    }
-
-    @PostMapping("/saveUser")
-    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/saveUser";
-        }
-        userService.saveUser(user);
-        return "redirect:/admin/";
-    }
-
-    @GetMapping("/updateUser")
-    public String updateUserForm(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
-        return "/updateUser";
-    }
-
-    @PostMapping("/updateUser")
-    public String updateUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "/updateUser";
-        }
-        userService.saveUser(user);
-        return "redirect:/admin/";
-    }
-
-    @GetMapping("/deleteUser")
-    public String deleteUser(@RequestParam("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/admin/";
+        log.info("User page accessed by: {}", principal.getUsername());
+        model.addAttribute("user", principal);
+        return "user";
     }
 }

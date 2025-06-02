@@ -5,8 +5,10 @@ import org.springframework.stereotype.Repository;
 import ru.itmentor.spring.boot_security.demo.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {             //final
     List<User> findAllByOrderByIdAsc();
+    Optional<User> findByUsername(String username);
 }
