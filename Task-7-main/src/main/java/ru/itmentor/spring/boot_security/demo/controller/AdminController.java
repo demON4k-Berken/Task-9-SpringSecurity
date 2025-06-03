@@ -33,7 +33,7 @@ public class AdminController {
     @GetMapping("/saveUser")
     public String saveUserForm(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("allRoles", roleRepository.findAll());       //add
+        model.addAttribute("allRoles", roleRepository.findAll());
         return "/saveUser";
     }
 
@@ -49,15 +49,14 @@ public class AdminController {
                 .map(id -> roleRepository.findById(id).orElseThrow())
                 .collect(Collectors.toSet());
         user.setRoles(roles);
-
         userService.saveUser(user);
         return "redirect:/admin/";
     }
 
     @GetMapping("/updateUser")
     public String updateUserForm(@RequestParam("id") Long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
-        model.addAttribute("allRoles", roleRepository.findAll());       //add
+        model.addAttribute("user", userService.findById(id).orElseThrow());
+        model.addAttribute("allRoles", roleRepository.findAll());
         return "/updateUser";
     }
 
@@ -71,6 +70,7 @@ public class AdminController {
         Set<Role> roles = roleIds.stream()
                 .map(id -> roleRepository.findById(id).orElseThrow())
                 .collect(Collectors.toSet());
+        user.setRoles(roles);
         userService.saveUser(user);
         return "redirect:/admin/";
     }

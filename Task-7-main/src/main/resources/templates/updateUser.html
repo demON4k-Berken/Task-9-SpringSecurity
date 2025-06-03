@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Изменение пользователя</title>
+    <meta charset="UTF-8">
+    <title>Обновление пользователя</title>
 </head>
 <body>
-<h1>Изменение пользователя</h1>
-<form th:action="@{/admin/updateUser}" th:object="${user}" method="post">
-  <input type="hidden" th:field="*{id}"/>
-
-  <div>
-    <label>Username:
-      <input type="text" th:field="*{username}" readonly/>
-    </label>
-  </div>
-
-  <div>
-    <label>Password:
-      <input type="password" th:field="*{password}" placeholder="Leave empty to keep current"/>
-    </label>
-  </div>
-
-  <div>
-    <label>Roles:
-      <select multiple th:field="*{roles}">
-        <option th:each="role : ${allRoles}"
-                th:value="${role.id}"
-                th:text="${role.name}"
-                th:selected="${user.roles.contains(role)}"></option>
-      </select>
-    </label>
-  </div>
-
-  <div>
-    <input type="submit" value="Update"/>
-  </div>
-</form>
-
 <form th:action="@{/logout}" method="post">
-  <button type="submit">Выйти</button>
+    <button type="submit">Выйти из аккаунта</button>
 </form>
+<h1>Обновление пользователя</h1>
+<form th:action="@{/admin/updateUser}" method="post">
+    <input type="hidden" th:name="id" th:value="${user.id}"/>
+    <table border="2">
+        <tr>
+            <td><label for="username">Логин: </label></td>
+            <td>
+                <input type="text" id="username" name="username"
+                       th:value="${user.username}" placeholder="Username"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="password">Пароль: </label></td>
+            <td>
+                <input type="password" id="password" name="password"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="roles"> Роли: </label></td>
+            <td>
+                <select name="roles" id="roles" multiple="multiple">
+                    <option th:each="role : ${allRoles}"
+                            th:value="${role.id}"
+                            th:text="${role.name}"
+                            th:selected="${#lists.contains(user.roles, role)}">
+                    </option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br>
+    <div>
+        <input type="submit" value="Обновить"/>
+    </div>
+</form>
+<br>
+<a th:href="@{/admin/}">
+    <button>Назад</button>
+</a>
+
 </body>
 </html>

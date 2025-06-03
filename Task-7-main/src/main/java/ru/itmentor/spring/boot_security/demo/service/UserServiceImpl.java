@@ -20,13 +20,14 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class UserServiceImpl implements UserService {           //final
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @PostConstruct
+    @Transactional
     public void initDefaultUsers() {
         Role adminRole = getOrCreateRole("ROLE_ADMIN");
         Role userRole = getOrCreateRole("ROLE_USER");
@@ -57,8 +58,17 @@ public class UserServiceImpl implements UserService {           //final
 
     @Override
     @Transactional
-    public void saveUser(User user) {                       //предлагает убрать булиан
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void saveUser(User user) {
+        if (user.getId() != null) {
+            User existingUser = userRepository.findById(user.getId()).orElseThrow();
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                user.setPassword(existingUser.getPassword());
+            } else {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
+        } else {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userRepository.save(user);
     }
 
@@ -83,6 +93,6 @@ public class UserServiceImpl implements UserService {           //final
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+                .orElseThrow();
     }
 }

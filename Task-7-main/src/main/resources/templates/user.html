@@ -5,11 +5,14 @@
     <title>Страница пользователя</title>
 </head>
 <body>
-<h1>Информация пользователя</h1>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Выйти из аккаунта</button>
+</form>
+<h1>Личный кабинет</h1>
 <table border="2">
     <tr>
         <th>ID</th>
-        <th>Имя</th>
+        <th>Логин</th>
         <th>Роли</th>
     </tr>
     <tr>
@@ -23,8 +26,5 @@
     </tr>
 </table>
 <br>
-<form th:action="@{/logout}" method="post">
-    <button type="submit">Выйти из аккаунта</button>
-</form>
 </body>
 </html>

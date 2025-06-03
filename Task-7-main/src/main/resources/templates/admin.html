@@ -5,15 +5,15 @@
     <title>Панель администратора</title>
 </head>
 <body>
-<h1>Панель Администратора</h1>
 <form th:action="@{/logout}" method="post">
     <button type="submit">Выйти из аккаунта</button>
 </form>
+<h1>Панель Администратора</h1>
 <h2>Список пользователей:</h2>
 <table border="2">
     <tr>
         <th>ID</th>
-        <th>Имя</th>
+        <th>Логин</th>
         <th>Роли</th>
         <th colspan="2">Действия</th>
     </tr>
@@ -34,5 +34,10 @@
 <br/>
 <a th:href="@{/admin/saveUser}" class="btn">
     <button>Создать нового пользователя</button>
+    <br>
+    <br>
+    <a th:href="@{/user/}">
+        <button>Личный кабинет</button>
+    </a>
 </body>
 </html>
