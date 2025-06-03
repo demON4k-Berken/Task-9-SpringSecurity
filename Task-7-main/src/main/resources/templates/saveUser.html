@@ -11,8 +11,6 @@
 <h1>Добавление пользователя</h1>
 <form action="#" th:action="@{/admin/saveUser}" th:object="${user}" method="post">
     <table border="2">
-
-
         <tr>
             <td><label for="username">Введите логин: </label></td>
             <td><input type="text" th:field="*{username}" id="username" placeholder="Username"/>
