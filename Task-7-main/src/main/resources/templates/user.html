@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Страница пользователя</title>
+    <style>
+        td, th {
+            min-width: 200px;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body>
 <form th:action="@{/logout}" method="post">
@@ -11,18 +17,24 @@
 <h1>Личный кабинет</h1>
 <table border="2">
     <tr>
-        <th>ID</th>
-        <th>Логин</th>
-        <th>Роли</th>
+        <td><strong>Логин</strong></td>
+        <td th:text="${user.username}"></td>
     </tr>
     <tr>
-        <td th:text="${user.id}"></td>
-        <td th:text="${user.username}"></td>
-        <td>
-            <span th:each="role, iter : ${user.roles}"
-                  th:text="${role.name} + (${iter.last} ? '' : ', ')">
-            </span>
-        </td>
+        <td><strong>Имя</strong></td>
+        <td th:text="${user.firstName}"></td>
+    </tr>
+    <tr>
+        <td><strong>Фамилия</strong></td>
+        <td th:text="${user.lastName}"></td>
+    </tr>
+    <tr>
+        <td><strong>Возраст</strong></td>
+        <td th:text="${user.age}"></td>
+    </tr>
+    <tr>
+        <td><strong>Почта</strong></td>
+        <td th:text="${user.email}"></td>
     </tr>
 </table>
 <br>

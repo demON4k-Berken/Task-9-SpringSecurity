@@ -26,6 +26,34 @@
             </td>
         </tr>
         <tr>
+            <td><label for="firstName">Имя: </label></td>
+            <td>
+                <input type="text" id="firstName" name="firstName"
+                       th:value="${user.firstName}" placeholder="Name"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="lastName">Фамилия: </label></td>
+            <td>
+                <input type="text" id="lastName" name="lastName"
+                       th:value="${user.lastName}" placeholder="Lastname"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="age">Возраст: </label></td>
+            <td>
+                <input type="number" id="age" name="age"
+                       th:value="${user.age}" placeholder="Age"/>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="email">Почта: </label></td>
+            <td>
+                <input type="email" id="email" name="email"
+                       th:value="${user.email}" placeholder="Email"/>
+            </td>
+        </tr>
+        <tr>
             <td><label for="roles"> Роли: </label></td>
             <td>
                 <select name="roles" id="roles" multiple="multiple">

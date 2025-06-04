@@ -12,7 +12,8 @@ import ru.itmentor.spring.boot_security.demo.service.UserService;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserController {
+public class UserController {                       // есть проблема с выводом актуальных данных после
+                                                    // изменения в личном кабинете со страницы админа
     private final UserService userService;
 
     @GetMapping
