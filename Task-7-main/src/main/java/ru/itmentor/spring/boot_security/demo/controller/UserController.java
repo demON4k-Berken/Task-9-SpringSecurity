@@ -12,13 +12,13 @@ import ru.itmentor.spring.boot_security.demo.service.UserService;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserController {                       // есть проблема с выводом актуальных данных после
-                                                    // изменения в личном кабинете со страницы админа
+public class UserController {
     private final UserService userService;
 
     @GetMapping
     public String userPage(@AuthenticationPrincipal User principal, Model model) {
-        model.addAttribute("user", principal);
+        User currentUser = userService.findById(principal.getId()).orElseThrow();
+        model.addAttribute("user", currentUser);
         return "user";
     }
 }
